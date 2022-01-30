@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title>Click the space bar</title>
+		<style>
+			html,body {
+				height: 100%;
+			}
+			.wrapper{
+				display: flex;
+				flex-wrap: wrap;
+				flex-flow: column;
+				justify-content: center;
+				text-align: center;
+				height: 100%;
+			}
+			.title{
+				font-size: 40px;
+			}
+			
+			.counter-wrapper{
+				font-size: 2em;
+				font-weight: bold;
+				color: #000;
+			}
+			.counter{
+				font-size: 5em;
+				color: #e28d73;
+				text-shadow: rgb(0 0 0) 1px 0px 2px, rgb(0 0 0) 0px 2px 0px, rgb(0 0 0) 1px 0px 0px, rgb(0 0 0) 0px -1px 1px;
+			}
+			
+			.timer{
+				font-size: 30px;
+				font-weight: bold;
+				color: #000000;
+			}
+			.reset{
+				blue: 20px 0;
+			}
+			
+			.reset #restart{
+				width: 220px;
+				background-color: #07004c;
+				color: #fff;
+				padding: 8px 10px;
+			}
+			
+		</style>
+    </head>
+    <body>
+		<div class="wrapper">
+			<h1 class="title">Spacebar Clicker</h1>
+			<div class="counter-wrapper">You have hit spacebar <span class="counter">0</span> times.</div>
+			<div class="timer">Timer : <span id="count">0</span> sec</div>
+			<div class="option">
+				<input type="number" id="duration">
+				<button id="setTime">Set Timer</button>
+			</div>
+			<div class="reset">
+				<button id="restart">Reset</button>
+			</div>
+		</div>
+        <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+		<script>
+			$(document).ready(function(){
+				let timer = 0;
+				let hits = 0;
+				let interval = null;
+				let started = false;
+				let completed = false;
+				
+				$('body').keyup(function(event){
+					if( event.keyCode === 32 ){
+						
+						if(!completed){
+							if( timer > 0){
+								
+								if( started === false ){
+									started = true;
+									
+									interval = setInterval(function(){
+										timer--;
+										$("#count").text( timer);
+										if(timer === 0){
+											completed = true;
+											clearInterval(interval);
+											
+											$("#duration").attr("disabled", false);
+											$("#setTime").attr("disabled", false);
+										}
+									}, 1000);
+									
+									$("#duration").attr("disabled", true);
+									$("#setTime").attr("disabled", true);
+								}
+								hits++;
+								$(".counter").text(hits);
+							}else{
+								hits++;
+								$(".counter").text(hits);
+							}
+						}
+					}
+				});
+				
+				$('#setTime').click(function(){
+					if( $("#duration").val() && $("#duration").val()>0 ){
+						completed =  false;
+						started = false;
+						timer = $("#duration").val();
+						$("#count").text(timer);
+						
+						hits = 0;
+						$(".counter").text(hits);
+					}else{
+						$("#duration").val("");
+					}
+				});
+				
+				$('#restart').click(function(){
+					$(".counter").text("0");
+					$("#count").text("0");
+					$("#duration").attr("disabled", false);
+					$("#setTime").attr("disabled", false);
+					$("#duration").val("");
+					
+					timer = 0;
+					hits = 0;
+					interval = null;
+					started = false;
+					completed = false;
+					
+				});
+				
+			
+			});
+		</script>
+    </body>
+	This website was made by Jtheking Subscribe to him here  -----> <!DOCTYPE html>
+<html>
+  <head>
+    <title>Click the button</title>
+  </head>
+  <body>
+    <button onclick="window.location.href='https://www.youtube.com/c/JtheKing?sub_confirmation=1';">
+      Click Here
+    </button>
+  </body>
+</html>
+</html>
